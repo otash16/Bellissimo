@@ -11,7 +11,7 @@ restaurantController.goHome = (req: Request, res: Response) => {
     } catch(err) {
         console.log('ERROR, goHome: ',err);
     }
-}
+};
 
 restaurantController.getLogin = (req: Request, res: Response) => {
     try{
@@ -20,7 +20,7 @@ restaurantController.getLogin = (req: Request, res: Response) => {
     } catch(err) {
         console.log('ERROR, Login: ',err);
     }
-}
+};
 
 restaurantController.getSignup = (req: Request, res: Response) => {
     try{
@@ -29,6 +29,23 @@ restaurantController.getSignup = (req: Request, res: Response) => {
     } catch(err) {
         console.log('ERROR, Signup: ',err);
     }
-}
+};
 
+restaurantController.processLogin = (req: Request, res: Response) => {
+    try{
+        console.log("processLogin");
+        res.send("DONE");
+    } catch(err) {
+        console.log('ERROR, processLogin: ',err);
+    }
+};
+
+restaurantController.processSignup = (req: Request, res: Response) => {
+    try{
+        console.log("processSignup");
+        res.send("DONE");
+    }catch{
+        console.log("ERROR, processLogin");
+    }
+}
 export default restaurantController;
