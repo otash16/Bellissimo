@@ -4,7 +4,7 @@ import MemberService from "../models/member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
 import session from "express-session";
-import { Message } from "../libs/Errors";
+import Errors, { Message } from "../libs/Errors";
 
 const restaurantController: T = {}; 
 
@@ -14,6 +14,7 @@ restaurantController.goHome = (req: Request, res: Response) => {
         res.send("Home Page");
     } catch(err) {
         console.log('ERROR, goHome: ',err);
+        res.redirect('/admin');
     }
 };
 
@@ -23,6 +24,7 @@ restaurantController.getLogin = (req: Request, res: Response) => {
         res.send("Login Page");
     } catch(err) {
         console.log('ERROR, Login: ',err);
+        res.redirect('/admin');
     }
 };
 
@@ -32,6 +34,7 @@ restaurantController.getSignup = (req: Request, res: Response) => {
         res.send("Signup Page");
     } catch(err) {
         console.log('ERROR, Signup: ',err);
+        res.redirect('/admin');
     }
 };
 
@@ -53,9 +56,12 @@ restaurantController.processSignup = async(req: AdminRequest, res: Response) => 
         });
     }catch(err){
         console.log("ERROR, processSignup: ",err);
-        res.send(err);
+        const message = 
+            err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+        res.send(`<script> alert("${message}"); window.location.replace("/admin/signup") </script>`);
     }
 }
+
 
 restaurantController.processLogin = async (req: AdminRequest, res: Response) => {
     try{
@@ -71,9 +77,25 @@ restaurantController.processLogin = async (req: AdminRequest, res: Response) => 
             res.send(result);
         });
 
+   } catch (err) {
+        console.log("Error on processLogin Page:", err);
+        const message = 
+            err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+        res.send(`<script> alert("${message}"); window.location.replace("/admin/login") </script>`);
+    }
+};
+
+
+
+restaurantController.logout = async (req: AdminRequest, res: Response) => {
+    try{
+        console.log('logout');
+        req.session.destroy(function(){
+            res.redirect("/admin");
+        });
     } catch(err) {
-        console.log('ERROR, processLogin: ',err);
-        res.send(err);
+        console.log('ERROR, logout: ',err);
+        res.redirect('/admin');
     }
 };
 
