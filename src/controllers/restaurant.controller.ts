@@ -33,23 +33,6 @@ restaurantController.getSignup = (req: Request, res: Response) => {
     }
 };
 
-restaurantController.processLogin = async (req: Request, res: Response) => {
-    try{
-        console.log("processLogin");
-        console.log("BODY:", req.body);
-        const input: LoginInput = req.body;
-
-        const memberService = new MemberService();
-        const result = await memberService.processLogin(input);
-
-
-        res.send(result);
-    } catch(err) {
-        console.log('ERROR, processLogin: ',err);
-        res.send(err);
-    }
-};
-
 restaurantController.processSignup = async(req: Request, res: Response) => {
     try{
         console.log("processSignup");
@@ -66,4 +49,21 @@ restaurantController.processSignup = async(req: Request, res: Response) => {
         res.send(err);
     }
 }
+
+restaurantController.processLogin = async (req: Request, res: Response) => {
+    try{
+        console.log("processLogin");
+        console.log("BODY:", req.body);
+        const input: LoginInput = req.body;
+
+        const memberService = new MemberService();
+        const result = await memberService.processLogin(input);
+
+
+        res.send(result);
+    } catch(err) {
+        console.log('ERROR, processLogin: ',err);
+        res.send(err);
+    }
+};
 export default restaurantController;
