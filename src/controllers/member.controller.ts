@@ -1,46 +1,42 @@
-import {Request, Response} from "express";
-import {T} from '../libs/types/common'
-import { MemberType } from "../libs/enums/member.enum";
-import { MemberInput } from "../libs/types/member";
-import MemberService from "../models/member.service";
-import { LoginInput } from "../libs/types/member";
-//REACT
-const memberController: T = {}; 
+// import {Request, Response} from "express";
+// import {T} from '../libs/types/common'
+// import { MemberType } from "../libs/enums/member.enum";
+// import { Member, MemberInput } from "../libs/types/member";
+// import MemberService from "../models/member.service";
+// import { LoginInput } from "../libs/types/member";
+// import Errors from "../libs/Errors";
+// //REACT
+// const memberController: T = {}; 
 
 
 
-memberController.signup = async(req: Request, res: Response) => {
-    try{
-        console.log("processSignup");
-        console.log("body: ",req.body); 
+// memberController.signup = async(req: Request, res: Response) => {
+//     try{
+//         console.log("signup");
+//         const input: MemberInput = req.body,
+//           result: Member = await MemberService.signup(input);
+//     }catch(err){
+//         console.log("ERROR, signup: ",err);
+//         if (err instanceof Errors) res.status(err.code).json(err);
+//         else res.status(Errors.standard.code).json(Errors.standard);
+//     }
+// }
 
-        const newMember: MemberInput = req.body;
-        newMember.memberType = MemberType.USER;
+// memberController.login = async (req: Request, res: Response) => {
+//     try{
+//         console.log("processLogin");
+//         console.log("BODY:", req.body);
+//         const input: LoginInput = req.body;
 
-        const memberService = new MemberService();
-        const result = await memberService.signup(newMember);
-        res.send(result);
-    }catch(err){
-        console.log("ERROR, processSignup: ",err);
-        res.send(err);
-    }
-}
-
-memberController.login = async (req: Request, res: Response) => {
-    try{
-        console.log("processLogin");
-        console.log("BODY:", req.body);
-        const input: LoginInput = req.body;
-
-        const memberService = new MemberService();
-        const result = await memberService.processLogin(input);
+//         const memberService = new MemberService();
+//         const result = await memberService.processLogin(input);
         
 
-        res.send(result);
-    } catch(err) {
-        console.log('ERROR, processLogin: ',err);
-        res.send(err);
-    }
-};
+//         res.send(result);
+//     } catch(err) {
+//         console.log('ERROR, processLogin: ',err);
+//         res.send(err);
+//     }
+// };
 
-export default memberController;
+// export default memberController;
