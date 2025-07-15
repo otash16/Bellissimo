@@ -20,9 +20,11 @@ export enum ProductStatus {
 }
 
 export enum ProductCollection {
-    DISH = "DISH",
+    PIZZA = "PIZZA",
     SALAD = "SALAD",
     DESSERT = "DESSERT",
     DRINK = "DRINK",
-    OTHER = "OTHER  "
+    SAUCE = "SAUCE",
+    COMBO = "COMBO",
+    STARTER = "STARTER"
 }
