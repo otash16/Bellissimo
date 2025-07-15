@@ -6,6 +6,8 @@ import { MemberType } from "../libs/enums/member.enum";
 import session from "express-session";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 
+const memberService = new MemberService();
+
 const restaurantController: T = {}; 
 
 restaurantController.goHome = (req: Request, res: Response) => {
@@ -101,7 +103,27 @@ restaurantController.logout = async (req: AdminRequest, res: Response) => {
     }
 };
 
+restaurantController.getUsers = async (req: AdminRequest, res: Response) => {
+    try{
+        console.log('getUsers');
+        const result = await memberService.getUsers();
+        console.log(result);
+        res.render('users', {users: result});
+        
+    } catch(err) {
+        console.log('ERROR, getUsers: ',err);
+        res.redirect('/admin/login');
+    }
+};
 
+restaurantController.updateChosenUser = async (req: AdminRequest, res: Response) => {
+    try{
+        console.log('updateChosenUser');
+    } catch(err) {
+        console.log('ERROR, updateChosenUser: ',err);
+        res.redirect('/admin/login');
+    }
+};
 
 restaurantController.checkAuthSession = async (req: AdminRequest, res: Response) => {
     try{
