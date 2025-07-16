@@ -13,7 +13,7 @@ const restaurantController: T = {};
 restaurantController.goHome = (req: Request, res: Response) => {
     try{
         console.log("goHome");
-        res.send("Home Page");
+        res.render("home");
     } catch(err) {
         console.log('ERROR, goHome: ',err);
         res.redirect('/admin');
@@ -23,7 +23,7 @@ restaurantController.goHome = (req: Request, res: Response) => {
 restaurantController.getLogin = (req: Request, res: Response) => {
     try{
         console.log("getlogin");
-        res.send("Login Page");
+        res.render("login");
     } catch(err) {
         console.log('ERROR, Login: ',err);
         res.redirect('/admin');
@@ -33,7 +33,7 @@ restaurantController.getLogin = (req: Request, res: Response) => {
 restaurantController.getSignup = (req: Request, res: Response) => {
     try{
         console.log("getSignup");
-        res.send("Signup Page");
+        res.render("signup");
     } catch(err) {
         console.log('ERROR, Signup: ',err);
         res.redirect('/admin');
@@ -43,6 +43,7 @@ restaurantController.getSignup = (req: Request, res: Response) => {
 restaurantController.processSignup = async(req: AdminRequest, res: Response) => {
     try{
         console.log("processSignup");
+        res.render('signup');
         const file = req.file;
         if(!file) throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
 
